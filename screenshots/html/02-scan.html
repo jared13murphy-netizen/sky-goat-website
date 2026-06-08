@@ -1,0 +1,80 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { background: linear-gradient(180deg, #0EA5E9 0%, #26AEEB 60%, #fff 100%); }
+  .viewfinder {
+    position: absolute; top: 700px; left: 110px; right: 110px;
+    height: 1600px; background: #050d18; border-radius: 60px;
+    overflow: hidden;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.4);
+  }
+  /* Camera viewfinder corners */
+  .corner { position: absolute; width: 100px; height: 100px; border: 12px solid var(--sky-soft); }
+  .corner.tl { top: 200px; left: 80px; border-right: none; border-bottom: none; border-radius: 24px 0 0 0; }
+  .corner.tr { top: 200px; right: 80px; border-left: none; border-bottom: none; border-radius: 0 24px 0 0; }
+  .corner.bl { bottom: 200px; left: 80px; border-right: none; border-top: none; border-radius: 0 0 0 24px; }
+  .corner.br { bottom: 200px; right: 80px; border-left: none; border-top: none; border-radius: 0 0 24px 0; }
+  /* Boarding pass mock */
+  .pass {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-3deg);
+    background: white; border-radius: 20px; padding: 50px 60px;
+    width: 720px; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    color: #0F172A;
+  }
+  .pass .top-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px dashed #d1d5db; }
+  .pass .airline { font-size: 38px; font-weight: 900; color: var(--sky-blue-deep); }
+  .pass .flight-num { font-size: 28px; font-weight: 700; color: #475569; }
+  .pass .route { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+  .pass .ap { text-align: center; }
+  .pass .ap .code { font-size: 84px; font-weight: 900; color: #0F172A; line-height: 1; }
+  .pass .ap .city { font-size: 22px; color: #475569; margin-top: 4px; }
+  .pass .arr { font-size: 56px; color: var(--sky-blue); }
+  .pass .details { display: flex; justify-content: space-between; margin-bottom: 32px; }
+  .pass .details .col { text-align: center; }
+  .pass .details .l { font-size: 18px; color: #94A3B8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+  .pass .details .v { font-size: 32px; font-weight: 800; }
+  .pass .barcode {
+    height: 110px; background: repeating-linear-gradient(90deg, #0F172A 0 4px, transparent 4px 10px);
+  }
+  /* Pulse ring around the pass to evoke "scanning" */
+  .ring {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 880px; height: 460px; border: 4px solid var(--sky-blue);
+    border-radius: 30px; opacity: 0.6;
+    box-shadow: 0 0 80px rgba(14,165,233,0.7);
+  }
+</style></head>
+<body>
+<div class="status-bar light">
+  <div class="time">9:41</div>
+  <div class="right"><span class="signal"></span><span class="wifi"></span><span class="battery"></span></div>
+</div>
+<div class="tagline">
+  <h2>Scan it. <em>Done.</em></h2>
+  <p class="sub">One barcode scan and Sky Goat knows everything about your flight.</p>
+</div>
+<div class="viewfinder">
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+  <div class="ring"></div>
+  <div class="pass">
+    <div class="top-row">
+      <div class="airline">DELTA</div>
+      <div class="flight-num">DAL 2225</div>
+    </div>
+    <div class="route">
+      <div class="ap"><div class="code">MSP</div><div class="city">Minneapolis</div></div>
+      <div class="arr">✈</div>
+      <div class="ap"><div class="code">MCO</div><div class="city">Orlando</div></div>
+    </div>
+    <div class="details">
+      <div class="col"><div class="l">Gate</div><div class="v">B12</div></div>
+      <div class="col"><div class="l">Boarding</div><div class="v">2:35 PM</div></div>
+      <div class="col"><div class="l">Seat</div><div class="v">14A</div></div>
+    </div>
+    <div class="barcode"></div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,75 @@
+/* Shared design tokens for all App Store screenshot mockups.
+ * Designed at exact App Store 6.7" iPhone Pro Max dimensions
+ * (1290 × 2796). Apple accepts this set for the 6.5" slot too.
+ */
+@font-face {
+  font-family: 'AppFont';
+  src: local('-apple-system'), local('BlinkMacSystemFont'),
+       local('Inter'), local('Segoe UI'), local('Roboto');
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+html, body { width: 1290px; height: 2796px; overflow: hidden;
+  font-family: -apple-system, 'Inter', system-ui, sans-serif; }
+
+:root {
+  --sky-blue: #0EA5E9;
+  --sky-blue-deep: #0284C7;
+  --sky-soft: #93D7F5;
+  --sky-bg: #EFF8FD;
+  --ink: #0F172A;
+  --ink-muted: #475569;
+  --pink: #F58CDE;
+  --pink-hot: #E91E8C;
+  --green: #22c55e;
+  --white: #FFFFFF;
+}
+
+/* iPhone status bar — baked in at 1290px wide */
+.status-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 130px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 60px 100px 0; font-size: 38px; font-weight: 700;
+  z-index: 100; color: var(--ink); pointer-events: none;
+}
+.status-bar.light { color: var(--white); }
+.status-bar .time { letter-spacing: 0.5px; }
+.status-bar .right { display: flex; gap: 18px; align-items: center; }
+.status-bar .signal,
+.status-bar .wifi,
+.status-bar .battery { display: inline-block; }
+.status-bar .signal::before { content: '▮▮▮▯'; letter-spacing: -8px; }
+.status-bar .wifi::before { content: '◉'; }
+.status-bar .battery {
+  display: inline-block; width: 90px; height: 38px;
+  border: 4px solid currentColor; border-radius: 8px; position: relative;
+}
+.status-bar .battery::before {
+  content: ''; position: absolute; left: 4px; top: 4px;
+  width: 70px; height: 22px; background: currentColor; border-radius: 3px;
+}
+.status-bar .battery::after {
+  content: ''; position: absolute; right: -10px; top: 12px;
+  width: 8px; height: 14px; background: currentColor; border-radius: 0 2px 2px 0;
+}
+
+/* Marketing tagline area — top of screenshot */
+.tagline {
+  position: absolute; top: 140px; left: 0; right: 0;
+  text-align: center; padding: 60px 80px 40px;
+  z-index: 50;
+}
+.tagline h2 {
+  font-size: 88px; font-weight: 900; letter-spacing: -0.025em;
+  line-height: 1.05; color: var(--white);
+  text-shadow: 0 6px 30px rgba(0,0,0,0.25);
+}
+.tagline h2 em { font-style: normal; color: var(--sky-soft); }
+.tagline .sub {
+  font-size: 38px; font-weight: 600; opacity: 0.95;
+  margin-top: 20px; color: var(--white);
+  text-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+/* Tagline on light backgrounds */
+.tagline.dark h2 { color: var(--ink); text-shadow: none; }
+.tagline.dark .sub { color: var(--ink-muted); text-shadow: none; }

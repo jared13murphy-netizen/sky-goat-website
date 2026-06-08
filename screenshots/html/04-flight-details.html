@@ -1,0 +1,61 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { background: linear-gradient(180deg, #0EA5E9 0%, #26AEEB 50%, #fff 100%); }
+  .device {
+    position: absolute; top: 700px; left: 130px; right: 130px;
+    height: 1900px; border-radius: 60px; overflow: hidden;
+    background: #0F172A; box-shadow: 0 50px 100px rgba(0,0,0,0.35);
+    padding: 60px 60px;
+  }
+  /* Slide-from-right panel content fills the device */
+  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 50px; }
+  .header .left .ident { font-size: 60px; font-weight: 900; color: white; letter-spacing: 2px; }
+  .header .left .airline { font-size: 28px; color: rgba(255,255,255,0.7); margin-top: 8px; font-weight: 600; }
+  .header .left .pill { display: inline-block; margin-top: 16px; background: rgba(14,165,233,0.25); border: 1px solid rgba(14,165,233,0.4); color: var(--sky-blue); padding: 8px 18px; border-radius: 999px; font-size: 22px; font-weight: 700; }
+  .header .arrow { color: var(--sky-blue); font-size: 64px; }
+  .section { color: rgba(255,255,255,0.45); font-size: 20px; font-weight: 800; letter-spacing: 3px; margin: 40px 0 16px; }
+  .block { background: rgba(255,255,255,0.04); border-radius: 24px; padding: 28px 36px; margin-bottom: 12px; }
+  .block .hero { font-size: 34px; font-weight: 800; color: white; margin-bottom: 18px; }
+  .row { display: flex; justify-content: space-between; padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+  .row:first-of-type { border-top: none; }
+  .row .l { color: rgba(255,255,255,0.55); font-size: 26px; font-weight: 600; }
+  .row .v { color: white; font-size: 28px; font-weight: 700; }
+</style></head>
+<body>
+<div class="status-bar light">
+  <div class="time">9:41</div>
+  <div class="right"><span class="signal"></span><span class="wifi"></span><span class="battery"></span></div>
+</div>
+<div class="tagline">
+  <h2>Everything <em>about your flight.</em></h2>
+  <p class="sub">One tap on the goat. The whole story.</p>
+</div>
+<div class="device">
+  <div class="header">
+    <div class="left">
+      <div class="ident">DAL 2225</div>
+      <div class="airline">Delta Air Lines</div>
+      <div class="pill">EN ROUTE / ON TIME</div>
+    </div>
+    <div class="arrow">→</div>
+  </div>
+
+  <div class="section">ARRIVAL</div>
+  <div class="block">
+    <div class="hero">Lands at 5:47 PM EST · in 2h 17m</div>
+    <div class="row"><span class="l">Gate</span><span class="v">B12</span></div>
+    <div class="row"><span class="l">Terminal</span><span class="v">2</span></div>
+    <div class="row"><span class="l">Baggage claim</span><span class="v">Check gate display</span></div>
+  </div>
+
+  <div class="section">CURRENTLY</div>
+  <div class="block">
+    <div class="row"><span class="l">Altitude</span><span class="v">30,000 ft</span></div>
+    <div class="row"><span class="l">Ground speed</span><span class="v">478 kt</span></div>
+    <div class="row"><span class="l">Heading</span><span class="v">SE</span></div>
+    <div class="row"><span class="l">Progress</span><span class="v">38% there</span></div>
+    <div class="row"><span class="l">Distance remaining</span><span class="v">1,137 mi</span></div>
+  </div>
+</div>
+</body></html>
