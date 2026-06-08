@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sky Goat — Look down.</title>
+<style>
+  :root {
+    --sky: #0EA5E9;
+    --sky-deep: #0284C7;
+    --sky-darker: #075985;
+    --night: #0a1929;
+    --ink: #0F172A;
+    --ink-muted: #94A3B8;
+    --white: #FFFFFF;
+    --accent: #F58CDE;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--night); color: var(--white); font-family: -apple-system, 'Inter', system-ui, sans-serif; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  /* Nav */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 0; background: rgba(10,25,41,0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  nav .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand img { width: 32px; height: 32px; filter: invert(1); }
+  .brand-name { font-weight: 800; letter-spacing: 0.3px; font-size: 17px; }
+  nav .right { display: flex; gap: 28px; align-items: center; font-size: 14px; }
+  nav .right a { color: rgba(255,255,255,0.7); font-weight: 500; transition: color .15s; }
+  nav .right a:hover { color: var(--white); }
+  .pill { background: var(--sky); color: white !important; padding: 10px 18px; border-radius: 999px; font-weight: 700; }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh; padding: 120px 32px 80px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(14,165,233,0.25) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 70%, rgba(245,140,222,0.15) 0%, transparent 50%),
+      linear-gradient(180deg, #0a1929 0%, #051120 100%);
+  }
+  /* Faux satellite grid */
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(14,165,233,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,165,233,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+  /* Faux flight path arc */
+  .hero::after {
+    content: ''; position: absolute; top: 35%; left: 5%; right: 5%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--sky) 30%, var(--sky) 70%, transparent);
+    transform: rotate(-3deg);
+    box-shadow: 0 0 24px rgba(14,165,233,0.7);
+  }
+  .hero-inner { position: relative; z-index: 2; text-align: center; max-width: 1000px; }
+  .hero h1 {
+    font-size: clamp(56px, 9vw, 130px); font-weight: 900;
+    letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 32px;
+  }
+  .hero h1 .blue {
+    background: linear-gradient(135deg, var(--sky) 0%, #93D7F5 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .tag {
+    font-size: clamp(18px, 2vw, 22px); color: rgba(255,255,255,0.7); max-width: 600px;
+    margin: 0 auto 40px; font-weight: 400;
+  }
+  .hero .btn {
+    display: inline-block; background: var(--sky); color: white; padding: 18px 36px;
+    border-radius: 999px; font-weight: 700; font-size: 16px;
+    box-shadow: 0 12px 40px rgba(14,165,233,0.5);
+    transition: transform .15s;
+  }
+  .hero .btn:hover { transform: translateY(-2px); }
+  /* Coordinate ticker */
+  .ticker {
+    position: absolute; bottom: 40px; left: 0; right: 0; display: flex; justify-content: center; z-index: 3;
+    font-family: 'SF Mono', 'Consolas', monospace; font-size: 13px; color: rgba(255,255,255,0.5);
+    letter-spacing: 1.5px;
+  }
+  /* Floating goat */
+  .goat-float {
+    position: absolute; top: 18%; right: 8%; width: 100px; z-index: 3;
+    filter: drop-shadow(0 8px 32px rgba(0,0,0,0.6));
+    animation: float 5s ease-in-out infinite;
+  }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  /* Stats strip */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    padding: 60px 32px; max-width: 1100px; margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat { text-align: center; padding: 20px; }
+  .stat .n {
+    font-size: clamp(36px, 4vw, 56px); font-weight: 900;
+    background: linear-gradient(135deg, var(--sky) 0%, #93D7F5 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  .stat .l { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+  /* Features as floating cards */
+  .features { padding: 120px 32px 100px; max-width: 1200px; margin: 0 auto; position: relative; }
+  .features h2 {
+    font-size: clamp(40px, 6vw, 72px); font-weight: 900; letter-spacing: -0.025em;
+    text-align: center; margin-bottom: 20px; line-height: 1.05;
+  }
+  .features h2 .blue {
+    background: linear-gradient(135deg, var(--sky) 0%, #93D7F5 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .features .sub { text-align: center; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto 80px; font-size: 17px; }
+  .floating-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 24px;
+  }
+  .feat {
+    background: linear-gradient(135deg, rgba(14,165,233,0.08) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 36px;
+    backdrop-filter: blur(10px);
+    transition: transform .2s, border-color .2s;
+  }
+  .feat:hover { transform: translateY(-4px); border-color: rgba(14,165,233,0.4); }
+  .feat.big { grid-row: span 2; min-height: 480px; display: flex; flex-direction: column; justify-content: space-between; }
+  .feat .badge {
+    display: inline-block; padding: 6px 12px; background: rgba(14,165,233,0.15);
+    border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: #93D7F5; margin-bottom: 16px;
+  }
+  .feat h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .feat.big h3 { font-size: 36px; }
+  .feat p { color: rgba(255,255,255,0.65); font-size: 15px; line-height: 1.6; }
+  .feat.big p { font-size: 17px; }
+  /* Faux preview in big card */
+  .preview {
+    margin-top: 24px;
+    background: linear-gradient(135deg, #0a1929 0%, #0F172A 100%);
+    border-radius: 16px; padding: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    font-family: 'SF Mono', monospace; font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    line-height: 2;
+  }
+  .preview .row { display: flex; justify-content: space-between; }
+  .preview .row .l { color: rgba(255,255,255,0.4); }
+  .preview .row .v { color: var(--sky); }
+
+  /* CTA */
+  .cta {
+    padding: 120px 32px; text-align: center; position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse at center, rgba(14,165,233,0.2) 0%, transparent 60%),
+      linear-gradient(180deg, var(--night) 0%, #051120 100%);
+  }
+  .cta h2 { font-size: clamp(36px, 5vw, 64px); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .cta a.btn {
+    display: inline-block; background: var(--sky); color: white; padding: 20px 40px;
+    border-radius: 999px; font-weight: 700; font-size: 17px;
+    box-shadow: 0 20px 60px rgba(14,165,233,0.5);
+  }
+
+  /* Footer */
+  footer { padding: 60px 32px 40px; background: #050d18; color: rgba(255,255,255,0.6); border-top: 1px solid rgba(255,255,255,0.06); }
+  footer .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  footer h4 { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; margin-bottom: 14px; color: white; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 8px; font-size: 13px; }
+  footer ul a:hover { color: var(--sky); }
+  footer .bb { font-size: 13px; line-height: 1.7; opacity: 0.6; max-width: 320px; margin-top: 12px; }
+  @media (max-width: 880px) {
+    .stats { grid-template-columns: 1fr 1fr; }
+    .floating-grid { grid-template-columns: 1fr; }
+    .feat.big { grid-row: span 1; min-height: 0; }
+    nav .right a { display: none; }
+    nav .right .pill { display: inline-block; }
+    footer .container { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="brand">
+      <img src="../assets/goat-logo.png" alt="Sky Goat">
+      <span class="brand-name">Sky Goat</span>
+    </a>
+    <div class="right">
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="pill">Get the App</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="../assets/goat-logo.png" class="goat-float" alt="">
+  <div class="hero-inner">
+    <h1>Look <span class="blue">down.</span></h1>
+    <p class="tag">Every flight you've ever taken, you've flown over thousands of things you knew nothing about. Sky Goat is the goat that finally tells you.</p>
+    <a href="#" class="btn">Download on the App Store →</a>
+  </div>
+  <div class="ticker">40.6°N · 89.4°W · 30,000 FT · 478 KT · EN ROUTE</div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="n">11,570</div><div class="l">Points of Interest</div></div>
+  <div class="stat"><div class="n">27,015</div><div class="l">Town Tidbits</div></div>
+  <div class="stat"><div class="n">8,001</div><div class="l">Famous Birthplaces</div></div>
+  <div class="stat"><div class="n">100%</div><div class="l">Wikipedia-verified</div></div>
+</div>
+
+<section class="features" id="features">
+  <h2>Built for the <span class="blue">window seat.</span></h2>
+  <p class="sub">Real-time narration of what you're flying over. Powered by your boarding pass and a very alert goat.</p>
+  <div class="floating-grid">
+    <div class="feat big">
+      <div>
+        <span class="badge">GOAT FEED</span>
+        <h3>It tells you what's just out the window.</h3>
+        <p>Every 10 miles, Sky Goat surfaces something cool below you — a famous birthplace, a river, a town with a strange origin story, a live MLB game. You glance down, you see it.</p>
+      </div>
+      <div class="preview">
+        <div class="row"><span class="l">JUST TO THE RIGHT · 13 mi</span></div>
+        <div class="row"><span class="v">Gateway Arch</span></div>
+        <div class="row"><span class="l">FAMOUS PERSON</span></div>
+        <div class="row"><span class="v">Born in Quincy, IL</span></div>
+        <div class="row"><span class="l">LIVE · MLB</span></div>
+        <div class="row"><span class="v">Cardinals vs Reds</span></div>
+      </div>
+    </div>
+    <div class="feat">
+      <span class="badge">BOARDING PASS</span>
+      <h3>Scan it once. Done.</h3>
+      <p>PDF417 scan locks Sky Goat onto your exact flight. No typing.</p>
+    </div>
+    <div class="feat">
+      <span class="badge">LIVE MAP</span>
+      <h3>Real ADS-B position.</h3>
+      <p>Your plane, in real time, on a hybrid satellite map.</p>
+    </div>
+    <div class="feat">
+      <span class="badge">POSTCARD</span>
+      <h3>One-tap brag.</h3>
+      <p>Auto-generated postcard of your flight path. iMessage-ready.</p>
+    </div>
+    <div class="feat">
+      <span class="badge">GROUND GOAT</span>
+      <h3>Land for sale below.</h3>
+      <p>Live Ground Goat listings on your flight corridor.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Your next flight is<br>about to be different.</h2>
+  <a href="#" class="btn">Download on the App Store →</a>
+</section>
+
+<footer>
+  <div class="container">
+    <div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="../assets/goat-logo.png" alt="" style="width: 28px; filter: invert(1);">
+        <span style="font-weight: 800; font-size: 16px; color: white;">Sky Goat</span>
+      </div>
+      <div class="bb">An in-flight companion that turns every window seat into a guided tour. Made by the Ground Goat team.</div>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">App Store</a></li>
+        <li><a href="#features">Features</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#privacy">Privacy Policy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@sky-goat.com">hello@sky-goat.com</a></li>
+        <li><a href="https://groundgoat.com">groundgoat.com →</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
