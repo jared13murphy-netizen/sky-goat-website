@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Sky Goat — The sky just got more interesting.</title>
-<meta name="description" content="An in-flight companion that turns every window seat into a guided tour. Powered by your boarding pass and your bighorn." />
+<meta name="description" content="An in-flight companion that turns every window seat into a guided tour. Powered by your boarding pass and your goat." />
 <style>
   :root {
     --sky-blue: #0EA5E9;
@@ -15,6 +15,7 @@
     --ink-muted: #475569;
     --white: #FFFFFF;
     --pink: #F58CDE;
+    --pink-hot: #E91E8C;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -26,51 +27,51 @@
   }
   a { color: inherit; text-decoration: none; }
 
-  /* Nav */
+  /* Nav — white background per user feedback */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: saturate(180%) blur(20px);
+    background: var(--white);
     border-bottom: 1px solid #E5E7EB;
     z-index: 100;
-    padding: 16px 0;
+    padding: 14px 0;
   }
   nav .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
-  .brand { display: flex; align-items: center; gap: 12px; }
-  .brand img { width: 36px; height: 36px; }
-  .brand-name { font-weight: 800; font-size: 18px; letter-spacing: 0.3px; }
+  /* Updated logo: uses the actual logo-light-bg PNG that includes Sky Goat wordmark */
+  .brand img { height: 36px; width: auto; display: block; }
   nav ul { list-style: none; display: flex; gap: 36px; }
   nav ul a { font-weight: 500; color: var(--ink-muted); transition: color .15s; }
   nav ul a:hover { color: var(--sky-blue); }
+  .nav-cta { color: var(--sky-blue) !important; font-weight: 700; }
 
   /* Hero */
   .hero {
-    padding: 140px 32px 80px;
-    background: linear-gradient(180deg, var(--sky-blue) 0%, var(--sky-blue) 40%, #26AEEB 65%, var(--sky-blue-soft) 90%, var(--white) 100%);
+    padding: 140px 32px 60px;
+    background: linear-gradient(180deg, var(--sky-blue) 0%, var(--sky-blue) 30%, #26AEEB 60%, var(--sky-blue-soft) 88%, var(--white) 100%);
     color: white;
     text-align: center;
     position: relative;
     overflow: hidden;
   }
+  /* Drifting clouds in the hero background */
   .hero::before {
-    content: ''; position: absolute; top: 30%; left: 10%; width: 200px; height: 60px;
-    background: rgba(255,255,255,0.6); border-radius: 60px; filter: blur(15px);
+    content: ''; position: absolute; top: 25%; left: 8%; width: 220px; height: 60px;
+    background: rgba(255,255,255,0.55); border-radius: 60px; filter: blur(18px);
   }
   .hero::after {
-    content: ''; position: absolute; top: 50%; right: 15%; width: 280px; height: 80px;
-    background: rgba(255,255,255,0.5); border-radius: 80px; filter: blur(20px);
+    content: ''; position: absolute; top: 45%; right: 12%; width: 300px; height: 80px;
+    background: rgba(255,255,255,0.45); border-radius: 80px; filter: blur(22px);
   }
   .hero-inner { max-width: 920px; margin: 0 auto; position: relative; z-index: 2; }
   .hero h1 {
     font-size: clamp(48px, 7vw, 88px); font-weight: 900;
-    letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 28px;
+    letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 24px;
     text-shadow: 0 4px 20px rgba(0,0,0,0.1);
   }
   .hero .tag {
     font-size: clamp(18px, 2.2vw, 24px);
-    font-weight: 500; opacity: 0.95; max-width: 640px; margin: 0 auto 48px;
+    font-weight: 500; opacity: 0.95; max-width: 640px; margin: 0 auto 40px;
   }
-  .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
+  .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
   .btn-primary {
     display: inline-block; background: var(--ink); color: var(--white);
     padding: 16px 32px; border-radius: 999px; font-weight: 700;
@@ -79,28 +80,115 @@
   }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
 
-  /* Phone mockup */
-  .phone-wrap { display: flex; justify-content: center; margin-top: 24px; }
+  /* Telemetry ticker (lifted from Mockup C) — sits in the hero
+     between the CTA button and the phone preview to evoke real
+     flight data and pull a bit of Sky Goat's actual in-flight vibe
+     onto the marketing page. */
+  .ticker {
+    display: inline-block;
+    padding: 10px 24px;
+    background: rgba(15,23,42,0.55);
+    color: rgba(255,255,255,0.95);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    margin-bottom: 50px;
+    backdrop-filter: blur(8px);
+  }
+  .ticker .dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 4px;
+    background: #22c55e; margin-right: 10px; vertical-align: middle;
+    box-shadow: 0 0 12px #22c55e;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+  }
+
+  /* Phone mockup — now shows an in-flight screen recreation
+     (map + goat marker + route header + Goat Feed cards) so the
+     hero visual reads as the actual app instead of a stock graphic.
+     This is HTML/CSS, not a real screenshot — easy to swap for a
+     real device-captured PNG later. */
+  .phone-wrap { display: flex; justify-content: center; }
   .phone {
-    width: 320px; height: 640px; border-radius: 50px;
-    background: #1a1a1a; padding: 14px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 12px 32px rgba(0,0,0,0.15);
+    width: 340px; height: 700px; border-radius: 52px;
+    background: #1a1a1a; padding: 12px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.35), 0 12px 32px rgba(0,0,0,0.15);
     position: relative;
-  }
-  .phone-screen {
-    width: 100%; height: 100%; border-radius: 36px; overflow: hidden;
-    background: linear-gradient(180deg, var(--sky-blue) 0%, var(--sky-blue-soft) 50%, var(--white) 100%);
-    position: relative;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-  }
-  .phone-screen .goat { width: 140px; }
-  .phone-screen .label {
-    margin-top: 24px; font-weight: 800; font-size: 22px; color: var(--ink);
   }
   .phone .notch {
-    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
-    width: 120px; height: 30px; background: #1a1a1a; border-radius: 0 0 18px 18px; z-index: 2;
+    position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+    width: 110px; height: 32px; background: #1a1a1a; border-radius: 0 0 18px 18px; z-index: 5;
   }
+  .phone-screen {
+    width: 100%; height: 100%; border-radius: 40px; overflow: hidden;
+    position: relative; display: flex; flex-direction: column;
+  }
+  /* In-flight header (matches the dark route card in the app) */
+  .ifh {
+    background: #0F172A; padding: 50px 18px 14px; color: white;
+    border-bottom: 2px solid rgba(255,255,255,0.06);
+  }
+  .ifh .ident { font-size: 11px; font-weight: 800; color: var(--sky-blue); letter-spacing: 2px; text-align: center; margin-bottom: 6px; }
+  .ifh .route { font-size: 22px; font-weight: 900; letter-spacing: 1.5px; text-align: center; }
+  .ifh .progress { margin: 12px 0 10px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 2px; position: relative; }
+  .ifh .progress::after { content: ''; position: absolute; left: 0; top: 0; width: 38%; height: 100%; background: var(--sky-blue); border-radius: 2px; }
+  .ifh .meta { font-size: 11px; color: rgba(255,255,255,0.7); text-align: center; letter-spacing: 0.5px; }
+  /* Map fake */
+  .map {
+    flex: 1; background:
+      radial-gradient(circle at 60% 40%, #6b8e54 0%, transparent 30%),
+      radial-gradient(circle at 30% 60%, #5a7a4a 0%, transparent 25%),
+      linear-gradient(135deg, #7ba366 0%, #5d8e4e 100%);
+    position: relative; overflow: hidden;
+  }
+  /* Flight path line */
+  .map .path {
+    position: absolute; top: 25%; left: 15%; right: 25%; height: 3px;
+    background: var(--sky-blue);
+    transform: rotate(8deg);
+    box-shadow: 0 0 12px rgba(14,165,233,0.7);
+  }
+  /* Goat marker */
+  .map .goat-pin {
+    position: absolute; top: 32%; left: 55%; width: 44px; height: 44px;
+    background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    transform: translate(-50%, -50%);
+  }
+  .map .goat-pin img { width: 30px; }
+  /* "Flying near" pill */
+  .map .flying-near {
+    position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(15,23,42,0.85); color: white; padding: 8px 14px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; backdrop-filter: blur(8px);
+  }
+  .map .flying-near .lbl { font-size: 9px; color: rgba(255,255,255,0.6); letter-spacing: 1.5px; margin-right: 6px; }
+  /* Listing dot */
+  .map .pink-dot {
+    position: absolute; top: 60%; left: 25%; width: 14px; height: 14px;
+    background: var(--pink); border-radius: 50%; border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  /* Bottom sheet (Goat Feed) */
+  .sheet {
+    background: white; padding: 12px 14px 0;
+    border-top-left-radius: 18px; border-top-right-radius: 18px;
+    box-shadow: 0 -8px 24px rgba(0,0,0,0.1);
+    height: 175px;
+  }
+  .sheet .handle { width: 32px; height: 4px; background: #cbd5e1; border-radius: 2px; margin: 0 auto 8px; }
+  .sheet .heading { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+  .sheet .card {
+    background: #E0F2FE; border-left: 3px solid var(--sky-blue); border-radius: 10px;
+    padding: 10px 12px; margin-bottom: 8px;
+  }
+  .sheet .card .top { display: flex; justify-content: space-between; font-size: 9px; font-weight: 800; letter-spacing: 1px; color: var(--sky-blue-deep); margin-bottom: 4px; }
+  .sheet .card .title { font-size: 14px; font-weight: 800; color: var(--ink); }
 
   /* Features */
   .features { padding: 100px 32px; max-width: 1200px; margin: 0 auto; }
@@ -110,22 +198,23 @@
   }
   .features .sub { text-align: center; color: var(--ink-muted); font-size: 18px; margin-bottom: 64px; }
   .grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
   }
+  /* Cards updated: icons removed per user feedback. Now title +
+     supporting line in a clean text-only layout. */
   .card {
-    background: var(--sky-blue-bg); border-radius: 24px; padding: 32px;
+    background: var(--sky-blue-bg); border-radius: 22px; padding: 32px 28px;
     border: 1px solid rgba(14,165,233,0.1);
     transition: transform .2s, box-shadow .2s;
   }
   .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(14,165,233,0.15); }
-  .card .icon {
-    width: 56px; height: 56px; background: var(--sky-blue); border-radius: 16px;
-    display: flex; align-items: center; justify-content: center; color: white;
-    font-size: 28px; margin-bottom: 20px;
+  .card .pre {
+    font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    color: var(--sky-blue-deep); margin-bottom: 14px;
   }
-  .card h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; }
-  .card p { color: var(--ink-muted); font-size: 15px; }
+  .card h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.01em; }
+  .card p { color: var(--ink-muted); font-size: 15px; line-height: 1.6; }
 
   /* Big quote */
   .quote {
@@ -149,10 +238,11 @@
   footer ul a:hover { color: var(--sky-blue-soft); }
   footer .brand-block { display: flex; flex-direction: column; gap: 16px; }
   footer .brand-block .bottom { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.7; }
+  footer .brand-block img { height: 38px; width: auto; filter: brightness(0) invert(1); }
   @media (max-width: 768px) {
     footer .container { grid-template-columns: 1fr 1fr; }
     nav ul { display: none; }
-    .hero { padding-top: 100px; }
+    .hero { padding-top: 110px; }
   }
 </style>
 </head>
@@ -161,14 +251,13 @@
 <nav>
   <div class="container">
     <a href="#" class="brand">
-      <img src="../assets/goat-logo.png" alt="Sky Goat">
-      <span class="brand-name">Sky Goat</span>
+      <img src="../assets/logo-with-text.png" alt="Sky Goat">
     </a>
     <ul>
       <li><a href="#features">Features</a></li>
       <li><a href="#privacy">Privacy</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#" style="color: var(--sky-blue); font-weight: 700;">Get the App</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="#" class="nav-cta">Get the App →</a></li>
     </ul>
   </div>
 </nav>
@@ -180,12 +269,43 @@
     <div class="cta-row">
       <a href="#" class="btn-primary">Download on the App Store →</a>
     </div>
+    <div class="ticker">
+      <span class="dot"></span>
+      40.6°N · 89.4°W · 30,000 FT · 478 KT · EN ROUTE
+    </div>
     <div class="phone-wrap">
       <div class="phone">
         <div class="notch"></div>
         <div class="phone-screen">
-          <img src="../assets/goat-logo.png" class="goat" alt="">
-          <div class="label">MWA → ORD</div>
+          <div class="ifh">
+            <div class="ident">DAL 2225</div>
+            <div class="route">MSP &nbsp;→&nbsp; MCO</div>
+            <div class="progress"></div>
+            <div class="meta">En Route · 38% there · 30,000 ft · 478 kt</div>
+          </div>
+          <div class="map">
+            <div class="flying-near">
+              <span class="lbl">FLYING NEAR</span>
+              Quincy, IL
+            </div>
+            <div class="path"></div>
+            <div class="pink-dot"></div>
+            <div class="goat-pin">
+              <img src="../assets/goat-logo.png" alt="">
+            </div>
+          </div>
+          <div class="sheet">
+            <div class="handle"></div>
+            <div class="heading">Goat Feed</div>
+            <div class="card">
+              <div class="top"><span>JUST TO THE RIGHT</span><span>13 mi</span></div>
+              <div class="title">Gateway Arch</div>
+            </div>
+            <div class="card">
+              <div class="top"><span>FAMOUS PERSON</span><span></span></div>
+              <div class="title">Born in Quincy, IL</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -197,24 +317,34 @@
   <p class="sub">Open Sky Goat when you board, and your goat does the rest.</p>
   <div class="grid">
     <div class="card">
-      <div class="icon">📍</div>
-      <h3>Look out the window</h3>
-      <p>Real-time call-outs tell you what's just to your left or right — rivers, towns, mountains, famous birthplaces.</p>
+      <div class="pre">LOOK OUT THE WINDOW</div>
+      <h3>Real-time call-outs</h3>
+      <p>Every few minutes, Sky Goat tells you what's just to your left or right — rivers, towns, mountains, famous birthplaces.</p>
     </div>
     <div class="card">
-      <div class="icon">📷</div>
-      <h3>Scan your boarding pass</h3>
-      <p>One scan and Sky Goat locks onto your flight. Live position, filed route, ETA, gate, baggage — all in your pocket.</p>
+      <div class="pre">BOARDING PASS</div>
+      <h3>Scan it once. Done.</h3>
+      <p>One PDF417 scan and Sky Goat locks onto your flight. Live position, filed route, ETA, gate, baggage — all in your pocket.</p>
     </div>
     <div class="card">
-      <div class="icon">🌾</div>
-      <h3>Discover what's below</h3>
+      <div class="pre">FLIGHT DETAILS</div>
+      <h3>Everything about your flight</h3>
+      <p>Tap your goat on the map for the full picture: arrival ETA + countdown, gate, terminal, baggage info, altitude, speed, heading, distance remaining, delays.</p>
+    </div>
+    <div class="card">
+      <div class="pre">DISCOVER WHAT'S BELOW</div>
+      <h3>11,000+ points of interest</h3>
       <p>From Wikipedia POIs to Ground Goat land listings, Sky Goat surfaces the cool things you're literally flying over.</p>
     </div>
     <div class="card">
-      <div class="icon">📬</div>
-      <h3>Share a postcard</h3>
-      <p>Auto-generated satellite-imagery postcards from your flight. Drop one in iMessage and brag a little.</p>
+      <div class="pre">POSTCARDS</div>
+      <h3>One-tap brag.</h3>
+      <p>Auto-generated satellite-imagery postcards from your flight. Real route, real cities, real stats. Drop one in iMessage.</p>
+    </div>
+    <div class="card">
+      <div class="pre">POST FROM THE FLIGHT</div>
+      <h3>Capture the moment</h3>
+      <p>Verified flyers can post photos directly from their flight — pinned to your real altitude and route. Build a flight journal you actually want to revisit. <em style="font-weight:600; color: var(--sky-blue-deep);">(Coming soon)</em></p>
     </div>
   </div>
 </section>
@@ -227,10 +357,7 @@
 <footer>
   <div class="container">
     <div class="brand-block">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <img src="../assets/goat-logo.png" alt="" style="width: 36px;">
-        <span style="font-weight: 800; font-size: 18px;">Sky Goat</span>
-      </div>
+      <img src="../assets/logo-with-text.png" alt="Sky Goat">
       <div class="bottom">An in-flight companion that turns every window seat into a guided tour.<br>Made by the Ground Goat team.</div>
     </div>
     <div>
@@ -250,7 +377,7 @@
     <div>
       <h4>Get in touch</h4>
       <ul>
-        <li><a href="mailto:hello@sky-goat.com">hello@sky-goat.com</a></li>
+        <li><a href="contact.html">Contact us →</a></li>
         <li><a href="https://groundgoat.com">groundgoat.com →</a></li>
       </ul>
     </div>
