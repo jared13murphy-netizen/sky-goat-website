@@ -1,0 +1,237 @@
+================================================================
+SKY GOAT — APP STORE LISTING COPY
+================================================================
+
+Open this in TextEdit or any editor. Highlight the text between
+each pair of >>> START / END <<< markers, copy, and paste straight
+into the matching field in App Store Connect.
+
+App Store Connect path: My Apps → Sky Goat → App Information
+                       (most fields) and Pricing & Availability
+                       (URL fields).
+
+================================================================
+1. APP NAME  (11 chars used / 30 allowed)
+================================================================
+
+>>> START — paste into "Name" >>>
+Sky Goat
+<<< END <<<
+
+
+================================================================
+2. SUBTITLE  (30 chars allowed)
+================================================================
+
+Three options. Pick whichever you prefer; only one goes in.
+
+>>> START — paste into "Subtitle" (RECOMMENDED, 24 chars) >>>
+Your in-flight tour guide
+<<< END <<<
+
+>>> START — alternative #1 (23 chars) >>>
+What you're flying over
+<<< END <<<
+
+>>> START — alternative #2 (25 chars) >>>
+The window seat, narrated
+<<< END <<<
+
+
+================================================================
+3. PROMOTIONAL TEXT  (170 chars allowed)
+================================================================
+
+This shows ABOVE the description on the App Store page. Editable
+any time without resubmitting for review — feel free to refresh
+this every couple weeks for seasonal moments.
+
+>>> START — paste into "Promotional Text" >>>
+Scan your boarding pass and Sky Goat tells you what you're flying over — landmarks, famous birthplaces, towns, sports, weather. Window seats just got way better.
+<<< END <<<
+
+
+================================================================
+4. DESCRIPTION  (4000 chars allowed; current draft ~1,946)
+================================================================
+
+>>> START — paste into "Description" >>>
+The sky just got more interesting.
+
+Sky Goat is your in-flight companion — an iPhone app that turns every window seat into a guided tour of everything you're flying over. Scan your boarding pass, sit back, and watch the goat go to work.
+
+THE GOAT FEED
+Every few minutes Sky Goat surfaces something cool below your plane:
+• Towns just to your left or right ("Quincy, IL — 13 miles")
+• Famous birthplaces ("Bing Crosby was born here")
+• Landmarks ("The Gateway Arch is just out the right window")
+• Local sports ("Cardinals beat the Reds 5-3 last night")
+• Trivia, weather, and what to expect at your destination
+
+LIVE FLIGHT TRACKING
+Real ADS-B position, real filed flight plan, real ETA. Watch your plane move on a hybrid satellite + roads map. See your altitude, ground speed, and progress at a glance.
+
+SCAN YOUR BOARDING PASS
+One PDF417 scan and Sky Goat locks onto your exact flight. No typing flight numbers. No signing in. Just point and go.
+
+POSTCARDS FROM THE SKY
+When you land, Sky Goat auto-generates a satellite-imagery postcard from your actual flight path — real route, real cities, real stats. Drop it in iMessage and brag a little.
+
+GROUND GOAT INTEGRATION
+Sky Goat surfaces active Ground Goat land listings within 100 miles of your flight path. Tap to see active auctions and private treaty listings the moment you're flying over them.
+
+WHAT MAKES IT DIFFERENT
+• Free. Works offline once loaded. No account required.
+• 11,570 points of interest, 27,015 town tidbits, 8,001 Wikipedia-verified famous-people birthplaces
+• Built-in safety filter that NEVER surfaces flight-disaster content
+• Designed for the window seat — every detail tuned for "look down at what?"
+• Made by the same team behind Ground Goat (the land-discovery app)
+
+REQUIRES
+• iOS 16+
+• iPhone with cellular data or in-flight Wi-Fi
+• Optional: camera access (boarding pass scanning), location access (precise overhead position)
+
+PRIVACY
+Sky Goat works without an account. Your flight history stays on your device unless you tell us otherwise. Read our full privacy policy at sky-goat.com/privacy.
+
+GET IN TOUCH
+hello@sky-goat.com
+<<< END <<<
+
+
+================================================================
+5. KEYWORDS  (100 chars allowed; this draft = exactly 100)
+================================================================
+
+Reminder: DO NOT include "Sky Goat" or "skygoat" here — Apple
+already indexes your app name for free. Wasting chars on it
+hurts your other keyword discoverability.
+
+>>> START — paste into "Keywords" >>>
+flight tracker,window seat,boarding pass,flight map,travel,inflight,plane,radar,wifi,landmarks,goat
+<<< END <<<
+
+
+================================================================
+6. CATEGORIES
+================================================================
+
+Primary category:    Travel
+Secondary category:  Navigation
+
+
+================================================================
+7. AGE RATING  →  4+
+================================================================
+
+When App Store Connect walks you through the rating questionnaire,
+answer as follows:
+
+Content (answer "None" for each):
+• Cartoon or Fantasy Violence
+• Realistic Violence
+• Sexual Content or Nudity
+• Profanity or Crude Humor
+• Alcohol, Tobacco, or Drug Use
+• Mature/Suggestive Themes
+• Horror/Fear Themes
+• Gambling
+• Contests
+• Medical/Treatment Information
+
+App functionality:
+• Unrestricted Web Access:           No
+• Gambling and Contests:             No
+• Made for Kids:                     No (this is a general-audience app)
+
+
+================================================================
+8. WHAT'S NEW (release notes — for THIS launch)
+================================================================
+
+>>> START — paste into "What's New" for the first release >>>
+Welcome aboard Sky Goat! Your new window-seat companion.
+
+• Scan your boarding pass and watch the goat go to work
+• Live ADS-B position on a hybrid satellite map
+• Real-time Goat Feed: towns, landmarks, famous birthplaces, sports, weather, trivia
+• Auto-generated postcards from your flight path
+• Live Ground Goat land listings on your flight corridor
+
+Bug reports + feature requests → hello@sky-goat.com
+<<< END <<<
+
+
+================================================================
+9. URLs  (in Pricing & Availability section)
+================================================================
+
+>>> START — Support URL >>>
+https://sky-goat.com/contact
+<<< END <<<
+
+>>> START — Marketing URL >>>
+https://sky-goat.com
+<<< END <<<
+
+>>> START — Privacy Policy URL >>>
+https://sky-goat.com/privacy
+<<< END <<<
+
+NOTE: All three URLs need to resolve to LIVE pages before Apple
+will accept submission. Marketing URL just needs to load; the
+others need real content. This is why we're building the
+website right now in parallel with everything else.
+
+
+================================================================
+10. APP REVIEW INFORMATION  (Demo account & contact info)
+================================================================
+
+>>> START — First Name >>>
+Jared
+<<< END <<<
+
+>>> START — Last Name >>>
+Murphy
+<<< END <<<
+
+>>> START — Email >>>
+jared13murphy@gmail.com
+<<< END <<<
+
+>>> START — Phone >>>
+[your phone number — Apple may call if review has questions]
+<<< END <<<
+
+>>> START — Demo Account >>>
+Not required — Sky Goat does not require sign-in
+<<< END <<<
+
+>>> START — Notes for Reviewer >>>
+Sky Goat is an in-flight companion app. Most features require an active flight to demo fully (live tracking, position-anchored content).
+
+For your review:
+• Tap "Demo flight" on the landing screen — this runs a simulated ORD → STL flight at accelerated speed so you can see every feature in ~3 minutes
+• The Goat Feed populates as the simulated plane progresses
+• "Share" generates a postcard you can preview without sending
+• Boarding pass scanning requires camera permission; without a real boarding pass you can use the demo mode instead
+
+Contact: jared13murphy@gmail.com (or hello@sky-goat.com)
+<<< END <<<
+
+
+================================================================
+END OF LISTING COPY
+================================================================
+
+Companion docs in this folder:
+
+  PRIVACY_POLICY.md       → full privacy policy text to publish at
+                            sky-goat.com/privacy
+
+  PRIVACY_DISCLOSURES.md  → exactly what to click in App Store
+                            Connect "App Privacy → Data Types"
+
+Questions? hello@sky-goat.com
