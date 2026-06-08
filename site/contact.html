@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Contact — Sky Goat</title>
+<style>
+  :root {
+    --sky-blue: #0EA5E9;
+    --sky-blue-deep: #0284C7;
+    --sky-blue-soft: #93D7F5;
+    --sky-blue-bg: #EFF8FD;
+    --ink: #0F172A;
+    --ink-muted: #475569;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    background: var(--white); color: var(--ink); line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Nav — identical to index */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--white); border-bottom: 1px solid #E5E7EB;
+    z-index: 100; padding: 14px 0;
+  }
+  nav .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
+  .brand img { height: 36px; width: auto; display: block; }
+  nav ul { list-style: none; display: flex; gap: 36px; }
+  nav ul a { font-weight: 500; color: var(--ink-muted); transition: color .15s; }
+  nav ul a:hover { color: var(--sky-blue); }
+  nav ul .active { color: var(--ink); font-weight: 700; }
+  .nav-cta { color: var(--sky-blue) !important; font-weight: 700; }
+
+  /* Page header */
+  .page-header {
+    padding: 140px 32px 60px;
+    background: linear-gradient(180deg, var(--sky-blue) 0%, #26AEEB 60%, var(--sky-blue-soft) 100%);
+    color: white; text-align: center;
+  }
+  .page-header h1 {
+    font-size: clamp(40px, 6vw, 64px); font-weight: 900;
+    letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 14px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .page-header p { font-size: 18px; opacity: 0.95; max-width: 580px; margin: 0 auto; }
+
+  /* Form */
+  .form-wrap {
+    max-width: 600px; margin: -40px auto 80px; padding: 0 32px;
+    position: relative; z-index: 2;
+  }
+  .form-card {
+    background: white; border-radius: 24px; padding: 40px;
+    box-shadow: 0 20px 60px rgba(15,23,42,0.12);
+    border: 1px solid #E5E7EB;
+  }
+  .form-card .lede {
+    font-size: 15px; color: var(--ink-muted); margin-bottom: 28px;
+  }
+  .field { margin-bottom: 20px; }
+  .field label {
+    display: block; font-size: 13px; font-weight: 700;
+    color: var(--ink); margin-bottom: 8px; letter-spacing: 0.3px;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%; padding: 14px 16px; border: 1.5px solid #E5E7EB;
+    border-radius: 12px; font-size: 15px; font-family: inherit;
+    background: var(--sky-blue-bg);
+    transition: border-color .15s, background .15s;
+    color: var(--ink);
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: none; border-color: var(--sky-blue); background: white;
+  }
+  .field textarea { min-height: 140px; resize: vertical; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .submit-btn {
+    width: 100%; background: var(--ink); color: white;
+    padding: 16px 28px; border: none; border-radius: 12px;
+    font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit;
+    transition: background .15s, transform .15s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { background: #1e293b; transform: translateY(-1px); }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  /* Status messages */
+  .status {
+    margin-top: 20px; padding: 14px 16px; border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    display: none;
+  }
+  .status.show { display: block; }
+  .status.success { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+  .status.error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+
+  /* Alt contact */
+  .alt {
+    text-align: center; margin-top: 40px; padding-top: 32px;
+    border-top: 1px solid #E5E7EB; color: var(--ink-muted); font-size: 14px;
+  }
+  .alt a { color: var(--sky-blue-deep); font-weight: 600; }
+  .alt a:hover { text-decoration: underline; }
+
+  /* Footer */
+  footer { padding: 60px 32px 40px; background: var(--ink); color: white; }
+  footer .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  footer h4 { font-size: 14px; font-weight: 700; margin-bottom: 16px; letter-spacing: 0.5px; text-transform: uppercase; opacity: 0.6; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul a { color: rgba(255,255,255,0.7); font-size: 14px; transition: color .15s; }
+  footer ul a:hover { color: var(--sky-blue-soft); }
+  footer .brand-block { display: flex; flex-direction: column; gap: 16px; }
+  footer .brand-block .bottom { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.7; }
+  footer .brand-block img { height: 38px; width: auto; filter: brightness(0) invert(1); }
+  @media (max-width: 768px) {
+    footer .container { grid-template-columns: 1fr 1fr; }
+    nav ul { display: none; }
+    .field-row { grid-template-columns: 1fr; }
+    .form-card { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="./assets/logo-with-text.png" alt="Sky Goat">
+    </a>
+    <ul>
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#privacy">Privacy</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="#" class="nav-cta">Get the App →</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-header">
+  <h1>Say hi.</h1>
+  <p>Bug reports, feature ideas, press inquiries, or just to tell us what you saw at 30,000 feet — we read every message.</p>
+</section>
+
+<div class="form-wrap">
+  <div class="form-card">
+    <p class="lede">Fill in the form and your message will land in our inbox. We aim to reply within one business day.</p>
+    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <!--
+        Web3Forms wiring (no backend required):
+          1. Go to https://web3forms.com/ and sign up (free) with info@groundgoat.com
+          2. Create a form pointed at info@groundgoat.com
+          3. Copy the Access Key Web3Forms gives you
+          4. Replace YOUR_WEB3FORMS_ACCESS_KEY below with that key
+        Once that's done, every form submission gets forwarded to
+        info@groundgoat.com automatically. Free tier = 250/month.
+      -->
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+      <input type="hidden" name="subject" value="New Sky Goat contact form submission">
+      <input type="hidden" name="from_name" value="sky-goat.com contact form">
+      <!-- Honeypot: bots will fill this, humans won't see it -->
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="topic">What's this about?</label>
+        <select id="topic" name="topic" required>
+          <option value="">Pick one…</option>
+          <option value="Bug report">Bug report</option>
+          <option value="Feature request">Feature request / idea</option>
+          <option value="Press inquiry">Press / partnership</option>
+          <option value="Account or billing">Account or billing</option>
+          <option value="Just saying hi">Just saying hi</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required placeholder="What's on your mind?"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">Send message →</button>
+
+      <div class="status success" id="status-success">
+        ✓ Thanks — your message landed in our inbox. We'll get back to you within one business day.
+      </div>
+      <div class="status error" id="status-error">
+        ✗ Something went wrong. Please email us directly at <a href="mailto:info@groundgoat.com">info@groundgoat.com</a>.
+      </div>
+    </form>
+
+    <div class="alt">
+      Prefer email? Reach us at <a href="mailto:info@groundgoat.com">info@groundgoat.com</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="brand-block">
+      <img src="./assets/logo-with-text.png" alt="Sky Goat">
+      <div class="bottom">An in-flight companion that turns every window seat into a guided tour.<br>Made by the Ground Goat team.</div>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">App Store</a></li>
+        <li><a href="index.html#features">Features</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="index.html#privacy">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <ul>
+        <li><a href="contact.html">Contact us →</a></li>
+        <li><a href="https://groundgoat.com">groundgoat.com →</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Form submit handler. Posts to Web3Forms, shows inline success/error
+  // without reloading. Falls back to mailto: if no Access Key is set.
+  const form = document.getElementById('contact-form');
+  const btn = document.getElementById('submit-btn');
+  const okMsg = document.getElementById('status-success');
+  const errMsg = document.getElementById('status-error');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    okMsg.classList.remove('show');
+    errMsg.classList.remove('show');
+
+    const accessKey = form.querySelector('[name="access_key"]').value;
+    if (accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+      // Dev/preview mode: web3forms not wired up yet. Fall back to mailto.
+      const data = new FormData(form);
+      const body = `From: ${data.get('name')} <${data.get('email')}>%0D%0ATopic: ${data.get('topic')}%0D%0A%0D%0A${data.get('message')}`;
+      window.location.href = `mailto:info@groundgoat.com?subject=${encodeURIComponent('Sky Goat contact — ' + data.get('topic'))}&body=${body}`;
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const data = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' },
+      });
+      const result = await response.json();
+      if (result.success) {
+        form.reset();
+        okMsg.classList.add('show');
+        btn.textContent = 'Sent ✓';
+      } else {
+        errMsg.classList.add('show');
+        btn.textContent = 'Send message →';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      errMsg.classList.add('show');
+      btn.textContent = 'Send message →';
+      btn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
