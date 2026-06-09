@@ -42,9 +42,12 @@
     padding: 14px 0;
   }
   nav .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
-  /* Logo bumped 36 → 64 per user feedback. The wordmark + goat
-     composite needs more presence in the nav. */
-  .brand img { height: 64px; width: auto; display: block; }
+  /* Logo bumped again per user feedback (36 → 64 → 96). Wordmark +
+     goat needs strong presence in the nav. Logo source is
+     1200×750, so at 96pt height the rendered width is ~154pt — a
+     reasonable max for a nav brand block. */
+  .brand img { height: 96px; width: auto; display: block; }
+  nav { padding: 8px 0; }
   nav ul { list-style: none; display: flex; gap: 36px; align-items: center; }
   nav ul a { font-weight: 500; color: var(--ink-muted); transition: color .15s; }
   nav ul a:hover { color: var(--sky-blue); }
