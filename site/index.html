@@ -80,13 +80,13 @@
   }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
 
-  /* Telemetry ticker (lifted from Mockup C) — sits in the hero
-     between the CTA button and the phone preview to evoke real
-     flight data and pull a bit of Sky Goat's actual in-flight vibe
-     onto the marketing page. */
+  /* Telemetry ticker (lifted from Mockup C) — sits BELOW the
+     phone in the hero, evoking real flight data while pulling a
+     bit of Sky Goat's actual in-flight vibe onto the marketing
+     page. Was above the phone before user feedback to move it. */
   .ticker {
     display: inline-block;
-    padding: 10px 24px;
+    padding: 12px 28px;
     background: rgba(15,23,42,0.55);
     color: rgba(255,255,255,0.95);
     border: 1px solid rgba(255,255,255,0.18);
@@ -94,7 +94,7 @@
     font-family: 'SF Mono', 'Consolas', monospace;
     font-size: 13px;
     letter-spacing: 1.5px;
-    margin-bottom: 50px;
+    margin-top: 0;
     backdrop-filter: blur(8px);
   }
   .ticker .dot {
@@ -108,87 +108,19 @@
     50% { opacity: 0.7; transform: scale(1.1); }
   }
 
-  /* Phone mockup — now shows an in-flight screen recreation
-     (map + goat marker + route header + Goat Feed cards) so the
-     hero visual reads as the actual app instead of a stock graphic.
-     This is HTML/CSS, not a real screenshot — easy to swap for a
-     real device-captured PNG later. */
-  .phone-wrap { display: flex; justify-content: center; }
+  /* Phone mockup — wraps a real device-captured screenshot. The
+     iOS status bar (time, battery, wifi) was cropped off before
+     export so the screenshot sits flush against the phone frame's
+     rounded inner corners. */
+  .phone-wrap { display: flex; justify-content: center; margin-bottom: 36px; }
   .phone {
-    width: 340px; height: 700px; border-radius: 52px;
+    width: 340px; border-radius: 52px;
     background: #1a1a1a; padding: 12px;
     box-shadow: 0 40px 100px rgba(0,0,0,0.35), 0 12px 32px rgba(0,0,0,0.15);
-    position: relative;
   }
-  .phone .notch {
-    position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-    width: 110px; height: 32px; background: #1a1a1a; border-radius: 0 0 18px 18px; z-index: 5;
+  .phone img.screen {
+    display: block; width: 100%; border-radius: 40px;
   }
-  .phone-screen {
-    width: 100%; height: 100%; border-radius: 40px; overflow: hidden;
-    position: relative; display: flex; flex-direction: column;
-  }
-  /* In-flight header (matches the dark route card in the app) */
-  .ifh {
-    background: #0F172A; padding: 50px 18px 14px; color: white;
-    border-bottom: 2px solid rgba(255,255,255,0.06);
-  }
-  .ifh .ident { font-size: 11px; font-weight: 800; color: var(--sky-blue); letter-spacing: 2px; text-align: center; margin-bottom: 6px; }
-  .ifh .route { font-size: 22px; font-weight: 900; letter-spacing: 1.5px; text-align: center; }
-  .ifh .progress { margin: 12px 0 10px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 2px; position: relative; }
-  .ifh .progress::after { content: ''; position: absolute; left: 0; top: 0; width: 38%; height: 100%; background: var(--sky-blue); border-radius: 2px; }
-  .ifh .meta { font-size: 11px; color: rgba(255,255,255,0.7); text-align: center; letter-spacing: 0.5px; }
-  /* Map fake */
-  .map {
-    flex: 1; background:
-      radial-gradient(circle at 60% 40%, #6b8e54 0%, transparent 30%),
-      radial-gradient(circle at 30% 60%, #5a7a4a 0%, transparent 25%),
-      linear-gradient(135deg, #7ba366 0%, #5d8e4e 100%);
-    position: relative; overflow: hidden;
-  }
-  /* Flight path line */
-  .map .path {
-    position: absolute; top: 25%; left: 15%; right: 25%; height: 3px;
-    background: var(--sky-blue);
-    transform: rotate(8deg);
-    box-shadow: 0 0 12px rgba(14,165,233,0.7);
-  }
-  /* Goat marker */
-  .map .goat-pin {
-    position: absolute; top: 32%; left: 55%; width: 44px; height: 44px;
-    background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    transform: translate(-50%, -50%);
-  }
-  .map .goat-pin img { width: 30px; }
-  /* "Flying near" pill */
-  .map .flying-near {
-    position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
-    background: rgba(15,23,42,0.85); color: white; padding: 8px 14px; border-radius: 999px;
-    font-size: 11px; font-weight: 600; backdrop-filter: blur(8px);
-  }
-  .map .flying-near .lbl { font-size: 9px; color: rgba(255,255,255,0.6); letter-spacing: 1.5px; margin-right: 6px; }
-  /* Listing dot */
-  .map .pink-dot {
-    position: absolute; top: 60%; left: 25%; width: 14px; height: 14px;
-    background: var(--pink); border-radius: 50%; border: 2px solid white;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  }
-  /* Bottom sheet (Goat Feed) */
-  .sheet {
-    background: white; padding: 12px 14px 0;
-    border-top-left-radius: 18px; border-top-right-radius: 18px;
-    box-shadow: 0 -8px 24px rgba(0,0,0,0.1);
-    height: 175px;
-  }
-  .sheet .handle { width: 32px; height: 4px; background: #cbd5e1; border-radius: 2px; margin: 0 auto 8px; }
-  .sheet .heading { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
-  .sheet .card {
-    background: #E0F2FE; border-left: 3px solid var(--sky-blue); border-radius: 10px;
-    padding: 10px 12px; margin-bottom: 8px;
-  }
-  .sheet .card .top { display: flex; justify-content: space-between; font-size: 9px; font-weight: 800; letter-spacing: 1px; color: var(--sky-blue-deep); margin-bottom: 4px; }
-  .sheet .card .title { font-size: 14px; font-weight: 800; color: var(--ink); }
 
   /* Features */
   .features { padding: 100px 32px; max-width: 1200px; margin: 0 auto; }
@@ -197,9 +129,14 @@
     text-align: center; margin-bottom: 16px;
   }
   .features .sub { text-align: center; color: var(--ink-muted); font-size: 18px; margin-bottom: 64px; }
+  /* Features grid — exactly 3 columns wide so the 6 cards lay out
+     as 2 rows of 3 (per user request). Collapses to 1 column on
+     mobile (<720px) for readability. */
   .grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+  }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
   }
   /* Cards updated: icons removed per user feedback. Now title +
      supporting line in a clean text-only layout. */
@@ -269,45 +206,14 @@
     <div class="cta-row">
       <a href="#" class="btn-primary">Download on the App Store →</a>
     </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <img class="screen" src="./assets/phone-screen.png" alt="Sky Goat in-flight screen showing flight tracking map with goat marker and Goat Feed">
+      </div>
+    </div>
     <div class="ticker">
       <span class="dot"></span>
       40.6°N · 89.4°W · 30,000 FT · 478 KT · EN ROUTE
-    </div>
-    <div class="phone-wrap">
-      <div class="phone">
-        <div class="notch"></div>
-        <div class="phone-screen">
-          <div class="ifh">
-            <div class="ident">DAL 2225</div>
-            <div class="route">MSP &nbsp;→&nbsp; MCO</div>
-            <div class="progress"></div>
-            <div class="meta">En Route · 38% there · 30,000 ft · 478 kt</div>
-          </div>
-          <div class="map">
-            <div class="flying-near">
-              <span class="lbl">FLYING NEAR</span>
-              Quincy, IL
-            </div>
-            <div class="path"></div>
-            <div class="pink-dot"></div>
-            <div class="goat-pin">
-              <img src="./assets/goat-logo.png" alt="">
-            </div>
-          </div>
-          <div class="sheet">
-            <div class="handle"></div>
-            <div class="heading">Goat Feed</div>
-            <div class="card">
-              <div class="top"><span>JUST TO THE RIGHT</span><span>13 mi</span></div>
-              <div class="title">Gateway Arch</div>
-            </div>
-            <div class="card">
-              <div class="top"><span>FAMOUS PERSON</span><span></span></div>
-              <div class="title">Born in Quincy, IL</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
