@@ -29,12 +29,22 @@
     z-index: 100; padding: 14px 0;
   }
   nav .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
-  .brand img { height: 36px; width: auto; display: block; }
-  nav ul { list-style: none; display: flex; gap: 36px; }
+  .brand img { height: 64px; width: auto; display: block; }
+  nav ul { list-style: none; display: flex; gap: 36px; align-items: center; }
   nav ul a { font-weight: 500; color: var(--ink-muted); transition: color .15s; }
   nav ul a:hover { color: var(--sky-blue); }
   nav ul .active { color: var(--ink); font-weight: 700; }
-  .nav-cta { color: var(--sky-blue) !important; font-weight: 700; }
+  .nav-cta {
+    display: inline-block;
+    background: var(--sky-blue) !important;
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: 700;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 12px rgba(14,165,233,0.3);
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(14,165,233,0.4); }
 
   /* Page header */
   .page-header {
@@ -115,9 +125,9 @@
   footer ul li { margin-bottom: 10px; }
   footer ul a { color: rgba(255,255,255,0.7); font-size: 14px; transition: color .15s; }
   footer ul a:hover { color: var(--sky-blue-soft); }
-  footer .brand-block { display: flex; flex-direction: column; gap: 16px; }
+  footer .brand-block { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
   footer .brand-block .bottom { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.7; }
-  footer .brand-block img { height: 38px; width: auto; filter: brightness(0) invert(1); }
+  footer .brand-block img { height: 56px; width: auto; max-width: 220px; filter: brightness(0) invert(1); }
   @media (max-width: 768px) {
     footer .container { grid-template-columns: 1fr 1fr; }
     nav ul { display: none; }
@@ -135,9 +145,8 @@
     </a>
     <ul>
       <li><a href="index.html#features">Features</a></li>
-      <li><a href="/privacy">Privacy</a></li>
       <li><a href="/contact" class="active">Contact</a></li>
-      <li><a href="#" class="nav-cta">Get the App →</a></li>
+      <li><a href="#" class="nav-cta">Get the App</a></li>
     </ul>
   </div>
 </nav>
@@ -201,13 +210,9 @@
         ✓ Thanks — your message landed in our inbox. We'll get back to you within one business day.
       </div>
       <div class="status error" id="status-error">
-        ✗ Something went wrong. Please email us directly at <a href="mailto:info@groundgoat.com">info@groundgoat.com</a>.
+        ✗ Something went wrong. Please try again in a moment.
       </div>
     </form>
-
-    <div class="alt">
-      Prefer email? Reach us at <a href="mailto:info@groundgoat.com">info@groundgoat.com</a>
-    </div>
   </div>
 </div>
 
@@ -228,7 +233,6 @@
       <h4>Legal</h4>
       <ul>
         <li><a href="/privacy">Privacy Policy</a></li>
-        <li><a href="#">Terms of Use</a></li>
       </ul>
     </div>
     <div>
@@ -256,10 +260,9 @@
 
     const accessKey = form.querySelector('[name="access_key"]').value;
     if (accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-      // Dev/preview mode: web3forms not wired up yet. Fall back to mailto.
-      const data = new FormData(form);
-      const body = `From: ${data.get('name')} <${data.get('email')}>%0D%0ATopic: ${data.get('topic')}%0D%0A%0D%0A${data.get('message')}`;
-      window.location.href = `mailto:info@groundgoat.com?subject=${encodeURIComponent('Sky Goat contact — ' + data.get('topic'))}&body=${body}`;
+      // Form not configured yet — show error rather than the old
+      // mailto fallback (per user: keep email private; form-only).
+      errMsg.classList.add('show');
       return;
     }
 
