@@ -1,0 +1,19 @@
+# Cloudflare Workers + Static Assets config.
+#
+# Cloudflare merged the old "Pages" product into Workers with a
+# static assets binding. This file tells `wrangler deploy` to upload
+# everything in /site as static content. Cloudflare serves it at
+# sky-goat-website.<account>.workers.dev (and at the custom domain
+# once that's wired up).
+#
+# No build step — these are plain HTML files.
+
+name = "sky-goat-website"
+compatibility_date = "2025-06-08"
+
+[assets]
+directory = "./site"
+# Render 404.html when a path doesn't match a file. Cloudflare will
+# fall back to /index.html if there's no 404 page, which is fine
+# for now since we don't have any 404 page yet.
+not_found_handling = "single-page-application"
