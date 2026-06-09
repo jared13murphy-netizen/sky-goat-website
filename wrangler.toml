@@ -13,7 +13,11 @@ compatibility_date = "2025-06-08"
 
 [assets]
 directory = "./site"
-# Render 404.html when a path doesn't match a file. Cloudflare will
-# fall back to /index.html if there's no 404 page, which is fine
-# for now since we don't have any 404 page yet.
+# Clean URLs: a request to /privacy is served from /privacy.html,
+# and /privacy.html is 301-redirected to /privacy. Same for
+# /contact ↔ /contact.html. Apple's App Privacy field will accept
+# either form, but clean URLs (sky-goat.com/privacy) read better
+# in App Store Connect than .html-suffixed ones.
+html_handling = "auto-trailing-slash"
+# Fall back to /index.html for unknown paths.
 not_found_handling = "single-page-application"
