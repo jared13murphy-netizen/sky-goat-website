@@ -69,41 +69,49 @@
 
 <section class="page-header">
   <h1>Privacy Policy</h1>
-  <p class="meta">Effective June 8, 2026 · Last updated June 8, 2026</p>
+  <p class="meta">Effective June 8, 2026 · Last updated June 22, 2026</p>
 </section>
 
 <section class="content">
 
 <div class="lede">
-  <p><strong>The short version.</strong> Sky Goat doesn't require an account, and we don't collect anything about you that you don't actively give us. Your flight history lives on your iPhone, not on our servers. We show ads via Google AdMob — if you opt in to tracking, those ads can be more relevant; if you opt out, you still see ads, just less targeted. We use third-party APIs to power features, and those services have their own privacy practices.</p>
+  <p><strong>The short version.</strong> Sky Goat works fully anonymously — no account required. If you decide to sign in (with Apple, one tap, no passwords), we sync your flight history across devices and let you post in-flight photos privately to your own account. Either way, we don't sell your data and we don't email-spam you. We show ads via Google AdMob — opt in for relevant ads, opt out for generic ones; you see ads either way.</p>
 </div>
 
-<p>That's it. No newsletter signup. No abandoned-cart emails. No selling your data, because we don't have your data.</p>
+<p>That's it. No newsletter signup. No abandoned-cart emails. No selling your data, because there's no incentive for us to do so.</p>
 
 <h2>What Sky Goat collects, in detail</h2>
 
-<h3>Stored on your device only — never sent to us</h3>
+<h3>Stored on your device only — never sent to us (anonymous mode)</h3>
 <ul>
-  <li><strong>Your flight history.</strong> Routes you've watched, miles flown, points of interest you've seen. Stored in iOS AsyncStorage. We don't have access to it. Deleting the app deletes it.</li>
+  <li><strong>Your flight history.</strong> When you're not signed in, routes you've watched, miles flown, and points of interest you've seen are stored only in iOS AsyncStorage. We don't have access to it. Deleting the app deletes it.</li>
   <li><strong>Your preferences.</strong> Category filters, settings choices. Stored locally.</li>
-  <li><strong>Your boarding pass scan results.</strong> The PDF417 barcode is decoded entirely on-device by iOS's camera APIs; we never see the raw image or extracted data.</li>
+  <li><strong>Your boarding pass scan results.</strong> The PDF417 barcode is decoded entirely on-device by iOS's camera APIs; we never see the raw image. The decoded flight identifier is what's sent to FlightAware to look up the flight.</li>
 </ul>
 
-<h3>Sent to us — only with your explicit interaction</h3>
+<h3>Sent to us — when you sign in or contact us</h3>
 <ul>
-  <li><strong>Email</strong> (only if you write to <a href="mailto:hello@sky-goat.com">hello@sky-goat.com</a> or contact support). We use it to reply. We don't add it to a list.</li>
+  <li><strong>Email</strong> (when you sign in with Apple — this may be your real address or an Apple-generated <code>@privaterelay.appleid.com</code> alias; both work the same. Also if you write to <a href="mailto:hello@sky-goat.com">hello@sky-goat.com</a> or contact support).</li>
+  <li><strong>Apple user ID</strong> (a stable opaque identifier Apple gives us so we can look up your account on subsequent sign-ins; not visible or usable outside Sky Goat).</li>
+  <li><strong>First name</strong> (only if you allow Apple to share it on first sign-in; optional, used to personalize the app).</li>
+  <li><strong>Flight history</strong> (once you sign in, the flights you save are synced to our servers so you can see them across devices).</li>
+  <li><strong>Photos you post as Moments</strong> (only when you tap "Add a Moment" on a boarding-pass-verified flight; stored on Cloudflare R2 and viewable only by you in V1).</li>
+  <li><strong>Reactions</strong> (the emoji you tap on your own Moments).</li>
+  <li><strong>Coarse location</strong> (only when you tap "Find flights near me" — used once, not tracked in the background).</li>
 </ul>
 
 <h3>Third-party APIs we call on your behalf</h3>
 <p>When you open Sky Goat or start a flight, the app makes HTTPS requests to:</p>
 <ul>
+  <li><strong>Apple</strong> (Sign in with Apple) — only when you tap the sign-in button. Apple authenticates you and hands us an ID token + email. You stay logged in with a Sky Goat JWT after that; we don't hit Apple again until you sign out and back in.</li>
+  <li><strong>Sky Goat backend</strong> (hosted on Railway) — once signed in, the app calls our own backend to sync flights, upload Moments, and fetch reactions. Photos themselves live on Cloudflare R2.</li>
   <li><strong>FlightAware AeroAPI</strong> — flight position, filed routes, ETAs. They see the flight number you're tracking and your device's IP address.</li>
   <li><strong>ESPN public scoreboard</strong> — sports scores for "your team has a game tonight" cards. They see your device's IP.</li>
   <li><strong>NWS (National Weather Service)</strong> — weather at your destination. They see your device's IP.</li>
   <li><strong>ArcGIS World Imagery</strong> — satellite tiles for the postcard hero image. They see your device's IP.</li>
   <li><strong>Ground Goat API</strong> — active land listings near your flight path. They see your device's IP. Operated by Ground Goat, the same company that makes Sky Goat. <a href="https://groundgoat.com/privacy">See Ground Goat's privacy policy →</a></li>
 </ul>
-<p>We don't proxy these requests; your phone talks to them directly. We don't see what they return.</p>
+<p>For the third-party content APIs (FlightAware, ESPN, NWS, ArcGIS, Ground Goat), we don't proxy these requests; your phone talks to them directly. We don't see what they return.</p>
 
 <h3>Google AdMob ads</h3>
 <p>Sky Goat displays occasional native ads in the Goat Feed via Google AdMob. AdMob shows ads regardless of your tracking choice, but it serves them differently based on what you choose:</p>
@@ -117,20 +125,28 @@
 
 <h2>What we don't do</h2>
 <ul>
-  <li>We don't have user accounts in V1. There's nothing for us to hack.</li>
+  <li>We don't require an account. The whole app works anonymously.</li>
   <li>We don't track your location in the background.</li>
-  <li>We don't sell, lease, or trade your information to anyone. There's nothing to sell.</li>
-  <li>We don't send marketing emails. We can't — we don't have your email.</li>
+  <li>We don't sell, lease, or trade your information to anyone.</li>
+  <li>We don't send marketing emails. The email we have (if you signed in) is used for account recovery and important service notices only.</li>
   <li>We don't use cookies. This is an iOS app, not a website.</li>
-  <li>We don't have analytics on what you tap. The flight history that exists is for YOUR use, not ours.</li>
+  <li>We don't show your Moments to anyone else. In V1, Moments are strictly private — only visible to you, signed in to your own account.</li>
+  <li>We don't analyze the contents of your photos. They're stored as opaque blobs in R2; we never run image classification on them.</li>
 </ul>
 
 <h2>Children</h2>
 <p>Sky Goat is rated 4+ and is suitable for all ages. We don't knowingly collect personal information from anyone, including children under 13. If you're a parent and believe your child has somehow sent us information (probably by writing to <a href="mailto:hello@sky-goat.com">hello@sky-goat.com</a>), email us and we'll delete it.</p>
 
 <h2>Your rights</h2>
-<p>Because we don't have user accounts in V1, there's nothing in our systems tied to you. If you want every trace of yourself removed from Sky Goat, delete the app — that removes all the local data. If you've emailed us, you can email us again asking us to delete the conversation, and we will.</p>
-<p>When we add user accounts in a future release, this section will expand to cover account deletion, data export, and the rights granted under California Consumer Privacy Act, GDPR, etc. Until then, those rights are essentially moot because the data doesn't exist.</p>
+<p>If you've never signed in, there's nothing in our systems tied to you. Delete the app and that's the end of it.</p>
+<p>If you have signed in, you can:</p>
+<ul>
+  <li><strong>Delete your account</strong> any time from <strong>Settings → Delete my account</strong> inside the app. Your account is immediately deactivated — your session token is invalidated and the account is no longer accessible. Your flight history, Moments (and the underlying photos on Cloudflare R2), and reactions are scheduled for permanent removal. We perform hard-deletion on a periodic basis; email <a href="mailto:info@groundgoat.com">info@groundgoat.com</a> from the address on the account if you want immediate hard-deletion.</li>
+  <li><strong>Delete individual Moments</strong> from the moment card in the app.</li>
+  <li><strong>Sign out</strong> from <strong>Settings → Sign out</strong> if you just want to stop syncing — your data stays safe and is restored when you sign back in.</li>
+  <li><strong>Email us</strong> at <a href="mailto:hello@sky-goat.com">hello@sky-goat.com</a> to request an export of your data or to ask any question about it. We aim to reply within a few business days.</li>
+</ul>
+<p>The rights granted by the California Consumer Privacy Act, GDPR, etc. (access, correction, deletion, portability) are honored — for most of them the in-app Delete button is the fastest path, but you can also reach out by email.</p>
 
 <h2>Changes to this policy</h2>
 <p>If we change anything material, we'll update the "Last updated" date at the top, post the change here, and (for changes that affect existing users meaningfully) surface it in the app the next time you open it.</p>

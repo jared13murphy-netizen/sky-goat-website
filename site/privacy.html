@@ -83,7 +83,7 @@
 
 <section class="page-header">
   <h1>Privacy Policy</h1>
-  <p class="meta">Last Updated: June 8, 2026</p>
+  <p class="meta">Last Updated: June 22, 2026</p>
 </section>
 
 <section class="content">
@@ -96,27 +96,46 @@
   <h2>Information We Collect</h2>
 
   <h3>Personal Information</h3>
-  <p>Sky Goat does not require an account to use the app. The only personal information we collect is what you actively provide when contacting us:</p>
+  <p>Sky Goat does not require an account to use the app. You can browse flights, scan boarding passes, and view points of interest fully anonymously. The personal information we collect is what you actively provide:</p>
   <ul>
-    <li>Email address (when you write to support or fill out our contact form)</li>
-    <li>Name (when you provide it in a support inquiry)</li>
+    <li>Email address (when you write to support, fill out our contact form, or sign in with Apple)</li>
+    <li>Name (when you provide it in a support inquiry, or as part of a Sign in with Apple credential)</li>
     <li>Any other information you choose to include in your message</li>
   </ul>
+
+  <h3>Account Information (Sign in with Apple)</h3>
+  <p>If you choose to create a Sky Goat account, we use Sign in with Apple exclusively (no passwords, no other social logins). When you sign in we receive from Apple:</p>
+  <ul>
+    <li>An Apple-issued stable user identifier — used to look up your account on subsequent sign-ins</li>
+    <li>Your email address — this may be your real email or an Apple-generated relay address ending in <code>@privaterelay.appleid.com</code>; either works the same for our purposes</li>
+    <li>Your first name (only if you allow Apple to share it on the first sign-in) — optional, used only to personalize the app</li>
+  </ul>
+  <p>We do not receive your Apple ID password, payment information, or any other account details from Apple.</p>
 
   <h3>Flight Information</h3>
   <p>When you use Sky Goat to track a flight, the app processes:</p>
   <ul>
     <li>Flight numbers you enter or scan from a boarding pass</li>
     <li>Boarding pass barcode data (decoded on-device only; we never receive the raw image)</li>
-    <li>Routes you've watched and miles flown (stored locally on your device, not on our servers)</li>
-    <li>Points of interest viewed during your flight (stored locally for de-duplication)</li>
+    <li>Routes you've watched and miles flown</li>
+    <li>Points of interest viewed during your flight</li>
+  </ul>
+  <p>If you are not signed in, this information is stored only on your device. If you are signed in to a Sky Goat account, your flight history is also synced to our servers so you can see your flights across devices.</p>
+
+  <h3>Photos and Moments</h3>
+  <p>If you are signed in and have scanned the boarding pass for a flight you are actually on, you may post photos ("Moments") attached to that flight from inside the app. When you post a Moment:</p>
+  <ul>
+    <li>The photo files you select are uploaded to Sky Goat's servers and stored on Cloudflare R2 object storage</li>
+    <li>Any caption you write is stored alongside the photo</li>
+    <li>In V1, your Moments are private — viewable only by you, signed in to your account. There is no public feed</li>
+    <li>You can delete any Moment at any time from inside the app; deletion removes the file from R2</li>
   </ul>
 
   <h3>Device Identifiers</h3>
   <p>If you allow tracking via Apple's App Tracking Transparency prompt, our advertising partner (Google AdMob) may access your device's advertising identifier (IDFA) to serve more relevant ads. If you decline tracking, ads are still displayed but are non-personalized. You can change this preference at any time in your iOS device's Settings.</p>
 
   <h3>Location Information</h3>
-  <p>Sky Goat does not currently track your device's location. The position shown on the map is the airplane's position obtained from public flight-tracking APIs, not your phone's GPS. Future updates may request your location for features such as "Flights Near Me," and you will be asked for permission at that time. You can disable location services at any time through your device settings.</p>
+  <p>Sky Goat uses your device's coarse location only when you tap "Flights Near Me" so we can find airborne flights overhead. You'll be asked for permission the first time you use that feature, and you can revoke it any time in iOS Settings. We do not track your location in the background. The plane position shown on the map during a flight is obtained from public flight-tracking APIs, not your phone's GPS.</p>
 </section>
 
 <section>
@@ -125,6 +144,9 @@
   <ul>
     <li>Provide and maintain the Sky Goat app and its in-flight features</li>
     <li>Surface relevant landmarks, towns, points of interest, and weather along your flight path</li>
+    <li>Authenticate you via Sign in with Apple and keep you signed in across sessions</li>
+    <li>Sync your flight history across devices when you're signed in</li>
+    <li>Store and display the photos ("Moments") you upload, privately to your own account</li>
     <li>Display advertisements to support the free version of the app</li>
     <li>Respond to your inquiries and support requests</li>
     <li>Improve the accuracy of our points-of-interest data over time</li>
@@ -136,6 +158,9 @@
   <h2>Information Sharing</h2>
   <p>We do not sell your personal information. We may share information with:</p>
   <ul>
+    <li>Apple, for Sign in with Apple authentication (we receive your stable Apple user ID and email from Apple, not the other way around)</li>
+    <li>Cloudflare R2, where photos you post as Moments are stored. Cloudflare acts as our storage provider and does not use the content for its own purposes</li>
+    <li>Railway, the hosting platform where the Sky Goat backend and database run</li>
     <li>Google AdMob, for advertising delivery and measurement</li>
     <li>Flight-data providers (FlightAware AeroAPI) when you actively track a flight — they receive the flight number and your device's IP address</li>
     <li>Third-party content providers (ESPN, the National Weather Service, ArcGIS, Ground Goat) when you use features that fetch their data — they receive your device's IP address</li>
@@ -151,12 +176,14 @@
 
 <section>
   <h2>Data Security</h2>
-  <p>We implement appropriate technical and organizational measures to protect your information against unauthorized access, alteration, disclosure, or destruction. Because Sky Goat does not currently store personal information on our servers, your flight history and preferences remain on your device under iOS's built-in protections. However, no method of transmission over the Internet is 100% secure.</p>
+  <p>We implement appropriate technical and organizational measures to protect your information against unauthorized access, alteration, disclosure, or destruction. Account data is stored in a managed PostgreSQL database on Railway, accessed only by the Sky Goat backend over TLS. Photos are stored in Cloudflare R2 and served via signed, expiring URLs. Authentication is handled by Sign in with Apple (we never see your Apple ID password) and authorized via short-lived JWT tokens. However, no method of transmission over the Internet is 100% secure.</p>
 </section>
 
 <section>
   <h2>Data Retention</h2>
-  <p>Your flight history and preferences are stored locally on your device and are deleted when you uninstall the app. Any messages you send us via email or our contact form are retained as long as needed to provide support and resolve your inquiry. You may request deletion of any correspondence at any time by contacting us.</p>
+  <p>Your local preferences are stored on your device and are deleted when you uninstall the app. If you are not signed in, your flight history is also only on your device. If you are signed in, your flight history and Moments live in our database and on Cloudflare R2 until you delete your account or the individual records.</p>
+  <p>Any messages you send us via email or our contact form are retained as long as needed to provide support and resolve your inquiry. You may request deletion of any correspondence at any time by contacting us.</p>
+  <p><strong>Account deletion.</strong> When you delete your account from Settings, your account is immediately deactivated: your sign-in token is invalidated and the account is no longer accessible to you or to anyone else. Your flight history, photos (Moments), and reactions are scheduled for permanent removal. We perform hard-deletion on a periodic basis; if you would like immediate hard-deletion of all stored data, email <a href="mailto:info@groundgoat.com">info@groundgoat.com</a> from the address associated with the account and we will complete it within a reasonable timeframe.</p>
 </section>
 
 <section>
@@ -166,6 +193,8 @@
     <li>Access any personal information we hold about you</li>
     <li>Correct inaccurate information</li>
     <li>Request deletion of your information</li>
+    <li>Delete your account at any time from <strong>Settings → Delete my account</strong>. Account deletion is permanent and irreversible.</li>
+    <li>Delete individual Moments from inside the app</li>
     <li>Opt out of personalized advertising via iOS's App Tracking Transparency settings</li>
     <li>Delete all locally stored Sky Goat data by uninstalling the app</li>
   </ul>
@@ -173,7 +202,7 @@
 
 <section>
   <h2>Third-Party Services</h2>
-  <p>Sky Goat integrates with third-party services including FlightAware AeroAPI (flight data), Google AdMob (advertising), ESPN (sports scores), the National Weather Service (weather), ArcGIS (satellite imagery), and Ground Goat (land listings). We are not responsible for the privacy practices of these third parties. We encourage you to review their privacy policies before providing any personal information.</p>
+  <p>Sky Goat integrates with third-party services including Apple (Sign in with Apple), Cloudflare R2 (photo storage), Railway (backend and database hosting), FlightAware AeroAPI (flight data), Google AdMob (advertising), ESPN (sports scores), the National Weather Service (weather), ArcGIS (satellite imagery), and Ground Goat (land listings). We are not responsible for the privacy practices of these third parties. We encourage you to review their privacy policies before providing any personal information.</p>
 </section>
 
 <section>
