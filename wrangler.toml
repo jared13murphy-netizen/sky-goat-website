@@ -11,8 +11,17 @@
 name = "sky-goat-website"
 compatibility_date = "2025-06-08"
 
+# Worker script wraps the static-asset serving so we can add dynamic
+# routes. /f/{ident} renders a smart-redirect page that tries to open
+# the Sky Goat app (skygoat://flight/{ident}) and falls back to the
+# App Store. Everything else falls through to env.ASSETS.fetch().
+main = "./src/worker.js"
+
 [assets]
 directory = "./site"
+# Bind the static asset namespace as env.ASSETS so the Worker can
+# call env.ASSETS.fetch(request) for non-dynamic routes.
+binding = "ASSETS"
 # Clean URLs: a request to /privacy is served from /privacy.html,
 # and /privacy.html is 301-redirected to /privacy. Same for
 # /contact ↔ /contact.html. Apple's App Privacy field will accept
